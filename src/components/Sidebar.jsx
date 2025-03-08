@@ -1,5 +1,9 @@
+import { useContext } from 'react';
+import { WorkoutContext } from '../store/workout-context';
 
-export default function Sidebar({ workouts, onDelete }) {
+export default function Sidebar() {
+
+    const { workouts, deleteWorkout } = useContext(WorkoutContext);
 
     console.log(workouts)
 
@@ -24,12 +28,12 @@ export default function Sidebar({ workouts, onDelete }) {
                                 <div className="text-[1rem] font-bold">
                                     {workout?.workout?.toUpperCase()}
                                 </div>
-                                <div>Duration: {workout?.duration}</div>
+                                <div>Duration: {workout?.duration} minutes</div>
                                 <div>{workout?.fillings}</div>
                             </div>
 
                             <button 
-                                onClick={() => onDelete(workout.id)}
+                                onClick={() => deleteWorkout(workout.id)}
                                 className="ms-5 px-3 py-1 md:text-base rounded-md bg-stone-100 text-red-600 hover:bg-stone-200 hover:text-red-700">
                                 Delete
                             </button>
@@ -38,7 +42,6 @@ export default function Sidebar({ workouts, onDelete }) {
                     ))}
                 </ul>
             )}
-
         </aside>
     )
 }

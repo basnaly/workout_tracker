@@ -1,6 +1,11 @@
-import { useRef } from "react";
+import { useRef, useContext, useState } from "react";
+import { WorkoutContext } from "../store/workout-context";
+import Timer from "./Timer";
 
-export default function Starting({workoutsState, onAdd}) {
+export default function Starting() {
+
+    const { addWorkout } = useContext(WorkoutContext);
+    const [workoutStarted, setWorkoutStarted] = useState(undefined);
 
     const todayDate = new Date().toLocaleString('en', {
         year: 'numeric',
@@ -31,13 +36,23 @@ export default function Starting({workoutsState, onAdd}) {
             minute: 'numeric'
         });
 
-        onAdd({
-            id: Math.random(),
+        const id = Math.random();
+
+        addWorkout({
+            id: id,
 			date: currentDate,
 			workout: enteredWorkout,
-			duration: enteredDuration + " minutes",
+			duration: enteredDuration,
 			feelings: ""
         })
+
+        setWorkoutStarted(id)
+    }
+
+    if (workoutStarted !== undefined) {
+        return (
+            <Timer workoutId={workoutStarted}/>
+        )
     }
 
     return (
