@@ -1,6 +1,6 @@
 import { useRef, useContext, useState } from "react";
 import { WorkoutContext } from "../store/workout-context";
-import Timer from "./Timer";
+import CurrentWorkout from "./CurrentWorkout";
 
 export default function Starting() {
 
@@ -51,7 +51,7 @@ export default function Starting() {
 
     if (workoutStarted !== undefined) {
         return (
-            <Timer workoutId={workoutStarted}/>
+            <CurrentWorkout workoutId={workoutStarted} />
         )
     }
 
