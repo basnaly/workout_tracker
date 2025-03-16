@@ -6,6 +6,7 @@ export const WorkoutContext = createContext({
     workouts: [],
     addWorkout: () => {},
     deleteWorkout: () => {},
+	updateWorkout: () => {},
 });
 
 function workoutsReducer(state, action) {
@@ -43,6 +44,20 @@ function workoutsReducer(state, action) {
 		}
 	}
 
+	if (action.type === "UPDATE_WORKOUT") {
+		const storedWorkouts = JSON.parse(localStorage.getItem("workouts")) || [];
+		storedWorkouts[0].rating = action.payload;
+		localStorage.setItem(
+			"workouts",
+			JSON.stringify(storedWorkouts)
+		)
+
+		return {
+			...state,
+			workouts: storedWorkouts,
+		}
+	}
+
 	return state;
 }
 
@@ -69,10 +84,18 @@ export default function WorkoutContextProvider({children}) {
 		})
 	}
 
+	function handleUpdateWorkout(rating) {
+		workoutsDispatch({
+			type: "UPDATE_WORKOUT",
+			payload: rating
+		})
+	}
+
     const contextValue = {
         workouts: workoutsState.workouts,
         addWorkout: handleAddWorkout,
-        deleteWorkout: handleDeleteWorkout
+        deleteWorkout: handleDeleteWorkout,
+		updateWorkout: handleUpdateWorkout
     }
 
     return (

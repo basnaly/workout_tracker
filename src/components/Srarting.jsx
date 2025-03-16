@@ -43,7 +43,7 @@ export default function Starting() {
 			date: currentDate,
 			workout: enteredWorkout,
 			duration: enteredDuration,
-			feelings: ""
+			rating: ""
         })
 
         setWorkoutStarted(id)
@@ -80,8 +80,7 @@ export default function Starting() {
                 >
                     Save and Start
                 </button>
-            </div>
-            
+            </div>   
         </div>
     )
 }

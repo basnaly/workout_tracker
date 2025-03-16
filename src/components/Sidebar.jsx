@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { WorkoutContext } from '../store/workout-context';
+import DisplayRating from './DisplayRating';
 
 export default function Sidebar() {
 
@@ -29,7 +30,10 @@ export default function Sidebar() {
                                     {workout?.workout?.toUpperCase()}
                                 </div>
                                 <div>Duration: {workout?.duration} minutes</div>
-                                <div>{workout?.fillings}</div>
+                                <div className='flex'>
+                                    Rating: 
+                                    <DisplayRating rating={workout?.rating} />
+                                </div>
                             </div>
 
                             <button 

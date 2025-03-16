@@ -9,7 +9,7 @@ import WorkoutContextProvider from './store/workout-context';
 // 		date: "",
 // 		workout: "",
 // 		duration: "",
-// 		feelings: ""
+// 		rating: ""
 // 	}
 // ]
 

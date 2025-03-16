@@ -1,12 +1,17 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { WorkoutContext } from "../store/workout-context";
 
 export default function RateWorkout() {
 
-    const [star, setStar] = useState(0);
+    const { updateWorkout } = useContext(WorkoutContext);
 
-    function handleRate() {
-        setStar();
+    const [ratedStar, setRatedStar] = useState(0);
+
+    function handleRate(star) {
+        setRatedStar(star);
+        updateWorkout(star)
     }
+    console.log(ratedStar)
 
     return (
         <div className="flex flex-col items-center">
@@ -16,7 +21,11 @@ export default function RateWorkout() {
             <ul className="flex mt-2">
                 {[1, 2, 3, 4, 5].map((star) => (
                     <li key={star}>
-                        <button className="mx-1">⭐️</button>
+                        <button className="mx-1"
+                            onClick={() => handleRate(star)}
+                        >
+                            {ratedStar >= star ? "⭐️" : "✩"}
+                        </button>
                     </li>
                     
                 ))}

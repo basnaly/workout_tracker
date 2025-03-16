@@ -8,12 +8,16 @@ export default function Timer({ duration, isTimerStart, setIsTimerStart, setIsTi
     const [remainingTime, setRemainingTime] = useState(initialDuration);
 
     useEffect(() => {
+        console.log("Set interval", interval.current)
         if (isTimerStart) {
             interval.current = setInterval(() => {
                 setRemainingTime((prevTime) => prevTime - 1);
             }, 1000) 
         } else {
             clearInterval(interval.current);
+        }
+        return () => {
+            clearInterval(interval.current)
         }
             
     }, [isTimerStart])
